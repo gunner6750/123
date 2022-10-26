@@ -30,11 +30,17 @@ int main(){
         printf ("\nError in loading the image3 \n");
         exit(1) ;
     }
-    for (int i=0;i<height;i++){
+
+    for (int i=1;i<height;i++){
         for (int j = 0; j < width ; j++){
+            int sum=0;
+                for ( int k = 0; k < channel ; k++) sum+=image1[i * width * channel + j * channel + k];
                 for ( int k = 0; k < channel ; k++){
-                        if (image1[i * width * channel + j * channel + k]==greenscreen[i * width * channel + j * channel + k])
+                    
+                        if (abs(image1[i * width * channel + j * channel + k]-greenscreen[i * width * channel + j * channel + k])<=30
+                        && abs(sum-369)<40)
                         image1[i * width * channel + j * channel + k]=weatherr[i * width * channel + j * channel + k];
+                        
                 }
         }
     }
